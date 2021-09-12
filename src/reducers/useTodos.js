@@ -1,5 +1,5 @@
-import { useReducer } from "react";
 import { guid } from "../utils";
+import { useImmerReducer } from "use-immer";
 
 const initialState = [];
 
@@ -12,16 +12,25 @@ const newTodo = (label) => ({
 const reducer = (items, action) => {
   switch (action.type) {
     case "ADD":
-      return items.concat(newTodo(action.label));
+      items.push(newTodo(action.label));
+      break;
     case "DEL":
-      return items.filter((i) => i.id !== action.id);
+      const index = items.findIndex((i) => i.id === action.id);
+      index !== -1 && items.splice(index, 1);
+      break;
+    case "TOGGLE":
+      const target = items.find((i) => i.id === action.id);
+      if (target) {
+        target.done = !target.done;
+      }
+      break;
     default:
       throw Error("未知类型");
   }
 };
 
 export default function useTodos() {
-  const [todos, dispatch] = useReducer(reducer, initialState);
+  const [todos, dispatch] = useImmerReducer(reducer, initialState);
 
   return [todos, dispatch];
 }
