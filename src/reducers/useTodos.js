@@ -10,7 +10,7 @@ const newTodo = (label) => ({
 });
 
 const reducer = (items, action) => {
-  // OPTIMIZE reducer这种字符串形式根本看不清，要封装成函数才合理
+  // OPTIMIZE reducer这种字符串形式根本看不清，而且case也没有块级作用域，命名还会冲突，要封装成函数才合理
   switch (action.type) {
     case "ADD":
       items.push(newTodo(action.label));
@@ -29,6 +29,12 @@ const reducer = (items, action) => {
       items.forEach(
         (i) => (i.done = action.value !== undefined ? action.value : !i.done)
       );
+      break;
+    case "SET_LABEL":
+      const item = items.find((i) => i.id === action.id);
+      if (item) {
+        item.label = action.value;
+      }
       break;
     default:
       throw Error("未知类型");

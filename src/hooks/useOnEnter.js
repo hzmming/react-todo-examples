@@ -6,5 +6,5 @@ export default function useOnEnter(callback, deps) {
       event.preventDefault();
       callback();
     }
-  }, deps); // QUESTION
+  }, deps || []); // QUESTION
 }
