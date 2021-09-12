@@ -1,7 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import TodoContext from "../context/TodoContext";
 import cn from "classnames";
 import useOnEnter from "../hooks/useOnEnter";
+import useOnClickOutside from "use-onclickoutside";
 
 export default function TodoItem({ todo }) {
   const { dispatch } = useContext(TodoContext);
@@ -29,6 +30,10 @@ export default function TodoItem({ todo }) {
   };
   // 回车完成编辑
   const onEnter = useOnEnter(finishedCallback);
+  const ref = useRef();
+  // TODO 再支持个esc退出
+  // 支持点击输入框之外，退出编辑模式
+  useOnClickOutside(ref, finishedCallback);
 
   return (
     <li
@@ -47,6 +52,7 @@ export default function TodoItem({ todo }) {
       </div>
       {editing && (
         <input
+          ref={ref}
           className="edit"
           // TODO 不应该实时改label值的，支持回车才真的改值！
           value={todo.label}

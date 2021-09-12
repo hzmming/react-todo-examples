@@ -2325,6 +2325,11 @@ aproba@^1.0.3, aproba@^1.1.1:
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
   integrity sha512-Y9J6ZjXtoYh8RnXVCMOU/ttDmk1aBjunq9vO0ta5x85WDQiQfUF9sIPBITdbiiIVcBo03Hi3jMxigBtsddlXRw==
 
+are-passive-events-supported@^1.1.0:
+  version "1.1.1"
+  resolved "https://r.cnpmjs.org/are-passive-events-supported/download/are-passive-events-supported-1.1.1.tgz#3db180a1753a2186a2de50a32cded3ac0979f5dc"
+  integrity sha1-PbGAoXU6IYai3lCjLN7TrAl59dw=
+
 are-we-there-yet@~1.1.2:
   version "1.1.7"
   resolved "http://npm.meitu-int.com/are-we-there-yet/-/are-we-there-yet-1.1.7.tgz#b15474a932adab4ff8a50d9adfa7e4e926f21146"
@@ -11347,6 +11352,26 @@ use-immer@^0.6.0:
   version "0.6.0"
   resolved "https://r.cnpmjs.org/use-immer/download/use-immer-0.6.0.tgz#ca6aa5ade93018e2c65cf128d19ada54fc23f70d"
   integrity sha1-ymqlrekwGOLGXPEo0ZraVPwj9w0=
+
+use-isomorphic-layout-effect@^1.0.0:
+  version "1.1.1"
+  resolved "https://r.cnpmjs.org/use-isomorphic-layout-effect/download/use-isomorphic-layout-effect-1.1.1.tgz#7bb6589170cd2987a152042f9084f9effb75c225"
+  integrity sha1-e7ZYkXDNKYehUgQvkIT57/t1wiU=
+
+use-latest@^1.0.0:
+  version "1.2.0"
+  resolved "https://r.cnpmjs.org/use-latest/download/use-latest-1.2.0.tgz#a44f6572b8288e0972ec411bdd0840ada366f232"
+  integrity sha1-pE9lcrgojgly7EEb3QhAraNm8jI=
+  dependencies:
+    use-isomorphic-layout-effect "^1.0.0"
+
+use-onclickoutside@^0.3.2:
+  version "0.3.2"
+  resolved "https://r.cnpmjs.org/use-onclickoutside/download/use-onclickoutside-0.3.2.tgz#1681704055463295a34236dee43d5911c6c3c418"
+  integrity sha1-FoFwQFVGMpWjQjbe5D1ZEcbDxBg=
+  dependencies:
+    are-passive-events-supported "^1.1.0"
+    use-latest "^1.0.0"
 
 use@^3.1.0:
   version "3.1.1"
