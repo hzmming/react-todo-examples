@@ -31,8 +31,19 @@ export default function TodoList() {
     todos,
   ]);
 
-  const anyDone = useMemo(() => todos.some((i) => i.done), [todos]);
+  // 当前过滤任务，是否全部已完成
+  const allSelected = useMemo(() => visibleTodos.every((i) => i.done), [
+    visibleTodos,
+  ]);
+  // 全部完成或重置
+  const onToggleAll = () => {
+    visibleTodos.forEach((i) => {
+      dispatch({ type: "TOGGLE", id: i.id, value: !allSelected });
+    });
+  };
 
+  // 清除已完成
+  const anyDone = useMemo(() => todos.some((i) => i.done), [todos]);
   const onClearCompleted = () => {
     dispatch({ type: "TOGGLE_ALL", value: false });
   };
@@ -52,7 +63,13 @@ export default function TodoList() {
         </header>
 
         <section className="main">
-          <input id="toggle-all" className="toggle-all" type="checkbox" />
+          <input
+            id="toggle-all"
+            className="toggle-all"
+            type="checkbox"
+            checked={allSelected}
+            onChange={onToggleAll}
+          />
           <label htmlFor="toggle-all" />
           <ul className="todo-list">
             {visibleTodos.map((todo) => (
