@@ -10,6 +10,7 @@ const newTodo = (label) => ({
 });
 
 const reducer = (items, action) => {
+  // OPTIMIZE reducer这种字符串形式根本看不清，要封装成函数才合理
   switch (action.type) {
     case "ADD":
       items.push(newTodo(action.label));
@@ -21,8 +22,13 @@ const reducer = (items, action) => {
     case "TOGGLE":
       const target = items.find((i) => i.id === action.id);
       if (target) {
-        target.done = !target.done;
+        target.done = action.value !== undefined ? action.value : !target.done;
       }
+      break;
+    case "TOGGLE_ALL":
+      items.forEach(
+        (i) => (i.done = action.value !== undefined ? action.value : !i.done)
+      );
       break;
     default:
       throw Error("未知类型");
