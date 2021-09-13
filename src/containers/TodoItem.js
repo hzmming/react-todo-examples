@@ -1,7 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import TodoContext from "../context/TodoContext";
 import cn from "classnames";
-import useOnEnter from "../hooks/useOnEnter";
 import useOnClickOutside from "use-onclickoutside";
 
 export default function TodoItem({ todo }) {
@@ -20,19 +19,31 @@ export default function TodoItem({ todo }) {
     // 双击开启编辑label模式
     setEditing(true);
   };
-  const onChange = (event) => {
-    dispatch({ type: "SET_LABEL", value: event.target.value, id: todo.id });
-  };
-  const finishedCallback = () => {
+  const exitEditing = () => {
     // 退出编辑label模式
     setEditing(false);
   };
-  // 回车完成编辑
-  const onEnter = useOnEnter(finishedCallback);
+  const onKeyUp = (event) => {
+    // 回车完成编辑
+    if (event.key === "Enter") {
+      event.preventDefault();
+      // 修改
+      dispatch({ type: "SET_LABEL", value: event.target.value, id: todo.id });
+      // 退出编辑label模式
+      exitEditing();
+      return;
+    }
+    // ESC退出编辑
+    if (event.key === "Escape") {
+      event.preventDefault();
+      // 退出编辑label模式
+      exitEditing();
+      return;
+    }
+  };
   const ref = useRef();
-  // TODO 再支持个esc退出
   // 支持点击输入框之外，退出编辑模式
-  useOnClickOutside(ref, finishedCallback);
+  useOnClickOutside(ref, exitEditing);
 
   return (
     <li
@@ -53,11 +64,9 @@ export default function TodoItem({ todo }) {
         <input
           ref={ref}
           className="edit"
-          // TODO 不应该实时改label值的，支持回车才真的改值！
-          value={todo.label}
+          defaultValue={todo.label}
           autoFocus={true}
-          onChange={onChange}
-          onKeyPress={onEnter}
+          onKeyUp={onKeyUp}
         />
       )}
     </li>
