@@ -16,7 +16,6 @@ export default function TodoItem({ todo }) {
   };
 
   const [editing, setEditing] = useState(false);
-  // TODO input应该自动获取焦点
   const handleViewClick = () => {
     // 双击开启编辑label模式
     setEditing(true);
@@ -56,6 +55,7 @@ export default function TodoItem({ todo }) {
           className="edit"
           // TODO 不应该实时改label值的，支持回车才真的改值！
           value={todo.label}
+          autoFocus={true}
           onChange={onChange}
           onKeyPress={onEnter}
         />
