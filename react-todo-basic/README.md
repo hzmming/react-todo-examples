@@ -1,6 +1,12 @@
 使用 context 和 reducer 实现的基本 TODO demo
 
 ```shell
+# 基本
+yarn add react-router-dom
+yarn add todomvc-app-css
+```
+
+```shell
 # 使用immer
 yarn add use-immer
 ```

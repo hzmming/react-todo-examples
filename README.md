@@ -3,3 +3,6 @@
 
 2. react-todo-easy-peasy
 改用 `easy-peasy` 进行状态管理
+
+3. react-todo-redux
+改用 `redux` 进行状态管理
